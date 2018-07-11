@@ -2,7 +2,7 @@ FROM resin/raspberrypi3-debian
 RUN [ "cross-build-start" ]
 
 RUN apt-get update && \
-apt-get install -yqq curl git build-essential openssh-client  supervisor
+apt-get install -yqq curl build-essential supervisor
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 && apt-get install -yqq nodejs 
