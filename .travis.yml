@@ -5,9 +5,11 @@ services:
   - docker
 
 env:
-  - PI_APP=oregonsensors
-  - PI_TYPE=RPI3
-  - PI_TYPE=ZERO
+  global:
+    - PI_APP=oregonsensors
+  matrix:
+    - PI_TYPE=RPI3
+    - PI_TYPE=ZERO
 
 script:
 - docker pull migruiz/$PI_APP$PI_TYPE || true
