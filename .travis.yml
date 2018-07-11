@@ -10,10 +10,9 @@ env:
 script:
 - cd $PI_APP/ || travis_terminate 1
 - docker pull migruiz/$PI_APP || true
-- docker build  --cache-from migruiz/$PI_APP  -t migruiz/$PI_APP .
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push migruiz/$PI_APP
-- cd ..
+- docker build  --cache-from migruiz/$PI_APP  -t migruiz/$PI_APP . || travis_terminate 1
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin || travis_terminate 1
+- docker push migruiz/$PI_APP || travis_terminate 1
 
 notifications:
    email:
