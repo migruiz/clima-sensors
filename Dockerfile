@@ -15,34 +15,23 @@ RUN curl -o wiringpi.tar.gz  "https://git.drogon.net/?p=wiringPi;a=snapshot;h=8d
 && cd ..
 
 
+RUN mkdir /code/ && mkdir /code/pusher/ 
+
+COPY pusher/package.json  /code/pusher/package.json
+
+RUN cd /code/pusher \
+&& npm  install 
+
+COPY pusher /code/pusher
+
+RUN mkdir /code/extractor/ 
+COPY extractor /code/extractor
+
+RUN cd /code/extractor \
+&& make 
 
 
-
-
-RUN mkdir /root/.ssh/
-# Copy over private key, and set permissions
-ADD privateSSH  /root/.ssh/id_rsa
-
-RUN chmod 400 /root/.ssh/id_rsa \
-&& touch /root/.ssh/known_hosts \
-&& ssh-keyscan vs-ssh.visualstudio.com >> /root/.ssh/known_hosts 
-
-
-
-# Clone the conf files into the docker container
-RUN git clone ssh://miguelAlfonsoRuiz@vs-ssh.visualstudio.com:22/OregonSensor/_ssh/OregonSensor \
-&& cd /OregonSensor/OregonSensor \
-&& make \
-&& cd .. \
-&& cd .. \
-&& mkdir sensordata
-
-
-# Clone node project
-RUN git clone ssh://miguelAlfonsoRuiz@vs-ssh.visualstudio.com:22/TemperatureSensorReadingProcessor/_ssh/TemperatureSensorReadingProcessor \
-&& cd /TemperatureSensorReadingProcessor \
-&& npm install 
-
+RUN mkdir /sensordata
 
 
 
