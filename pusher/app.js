@@ -30,7 +30,7 @@ function handleReadingFileGeneratedV2(fileName) {
         try {
             var data = await(fs.readFile(filePath, 'utf8'));
             var content = { data: data, fileName: fileName, piId: piId };
-            await(reportContentAsync('amqp://pi:pi@192.168.0.215', content));
+            await(reportContentAsync('amqp://pi:pi@192.168.0.96', content));
             await(fs.unlink(filePath));
         }
         catch (error) {
