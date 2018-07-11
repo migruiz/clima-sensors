@@ -17,6 +17,12 @@ RUN curl -o wiringpi.tar.gz  "https://git.drogon.net/?p=wiringPi;a=snapshot;h=8d
 && cd ..
 
 
+RUN mkdir /code/extractor/ 
+COPY extractor /code/extractor
+
+RUN cd /code/extractor \
+&& make 
+
 RUN mkdir /code/ && mkdir /code/pusher/ 
 
 COPY pusher/package.json  /code/pusher/package.json
@@ -24,18 +30,12 @@ COPY pusher/package.json  /code/pusher/package.json
 RUN cd /code/pusher \
 && npm  install 
 
-COPY pusher /code/pusher
 
-RUN mkdir /code/extractor/ 
-COPY extractor /code/extractor
-
-RUN cd /code/extractor \
-&& make 
 
 
 RUN mkdir /sensordata
 
-
+COPY pusher /code/pusher
 
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
