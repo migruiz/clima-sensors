@@ -5,7 +5,7 @@ var Inotify = require('inotify').Inotify;
 var inotify = new Inotify();
 var await = require('asyncawait/await');
 var async = require('asyncawait/async');
-var sensorDataPath = '/home/pi/sensordata/';
+var sensorDataPath = '/sensordata/';
 
 var piId = process.argv[2];
 
