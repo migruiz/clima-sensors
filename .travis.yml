@@ -8,7 +8,7 @@ env:
   - PI_APP=oregonsensors
 
 script:
-- cd $PI_APP/
+- cd $PI_APP/ || travis_terminate 1
 - docker pull migruiz/$PI_APP || true
 - docker build  --cache-from migruiz/$PI_APP  -t migruiz/$PI_APP .
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
