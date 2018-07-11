@@ -14,6 +14,7 @@ RUN curl -o wiringpi.tar.gz  "https://git.drogon.net/?p=wiringPi;a=snapshot;h=8d
 && ./build \
 && cd ..
 
+RUN mkdir /code/
 
 RUN mkdir /code/extractor/ 
 COPY extractor /code/extractor
@@ -22,7 +23,7 @@ RUN cd /code/extractor \
 && make 
 
 
-RUN mkdir /code/ && mkdir /code/pusher/ 
+RUN mkdir /code/pusher/ 
 
 COPY pusher/package.json  /code/pusher/package.json
 
