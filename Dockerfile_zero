@@ -43,7 +43,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN [ "cross-build-end" ]  
 
 
-
+ENV NODEID 2
+ENV TEMPQUEUEURL amqp://pi:pi@192.168.0.96
 
 
 ENTRYPOINT ["/usr/bin/supervisord"]

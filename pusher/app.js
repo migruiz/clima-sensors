@@ -7,7 +7,7 @@ var await = require('asyncawait/await');
 var async = require('asyncawait/async');
 var sensorDataPath = '/sensordata/';
 
-var piId = process.argv[2];
+var piId = process.env.NODEID;
 
 
 inotify.addWatch({
@@ -30,7 +30,7 @@ function handleReadingFileGeneratedV2(fileName) {
         try {
             var data = await(fs.readFile(filePath, 'utf8'));
             var content = { data: data, fileName: fileName, piId: piId };
-            await(reportContentAsync('amqp://pi:pi@192.168.0.96', content));
+            await(reportContentAsync(process.env.TEMPQUEUEURL, content));
             await(fs.unlink(filePath));
         }
         catch (error) {
