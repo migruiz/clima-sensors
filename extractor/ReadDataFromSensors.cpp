@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 			}
 			delete s;
 		}
-		delay(80);
+		delay(10);
 	}
 
 
