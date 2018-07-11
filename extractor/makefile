@@ -1,4 +1,4 @@
-CXXFLAGS += -O2 -Wall -g -pthread 
+CXXFLAGS += -O2 -Wall -g -pthread -std=c++11
 
 all: ReadDataFromSensors
 
