@@ -8,8 +8,8 @@ env:
   global:
     - PI_APP=oregonsensors
   matrix:
-    - PI_TYPE=RPI3
-    - PI_TYPE=ZERO
+    - PI_TYPE=rpi3
+    - PI_TYPE=zero
 
 script:
 - docker pull migruiz/$PI_APP$PI_TYPE || true
