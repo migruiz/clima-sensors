@@ -1,0 +1,20 @@
+sudo: required
+
+
+services:
+  - docker
+
+env:
+  - PI_APP=oregonsensors
+
+script:
+- cd $PI_APP/
+- docker pull migruiz/$PI_APP || true
+- docker build  --cache-from migruiz/$PI_APP  -t migruiz/$PI_APP .
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker push migruiz/$PI_APP
+- cd ..
+
+notifications:
+   email:
+      - mig.ruiz@gmail.com
