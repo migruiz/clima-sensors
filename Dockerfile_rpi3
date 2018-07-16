@@ -1,10 +1,11 @@
 FROM resin/raspberrypi3-debian
 RUN [ "cross-build-start" ]
 
+RUN apt-get update && \
+apt-get install -yqq --no-install-recommends g++ gcc make supervisor  && rm -rf /var/lib/apt/lists/*
 
-
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - 
-RUN apt-get update && apt-get install -yqq --no-install-recommends nodejs supervisor  && rm -rf /var/lib/apt/lists/*
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+&& apt-get install -yqq --no-install-recommends nodejs   && rm -rf /var/lib/apt/lists/*
 
 RUN curl -o wiringpi.tar.gz  "https://git.drogon.net/?p=wiringPi;a=snapshot;h=8d188fa0e00bb8c6ff6eddd07bf92857e9bd533a;sf=tgz" \
 &&  mkdir /wiringPi \
