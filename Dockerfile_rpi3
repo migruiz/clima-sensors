@@ -46,7 +46,6 @@ RUN [ "cross-build-end" ]
 
 ENV NODEID 1
 ENV MQTTServer  mqtt://192.168.0.137
-ENV SENSORDATAPATH /sensordata/
 
 
 

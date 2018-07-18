@@ -2,11 +2,11 @@ var mqtt = require('mqtt')
 var fs = require('mz/fs')
 var Inotify = require('inotify').Inotify;
 var inotify = new Inotify();
-var sensorDataPath = process.env.SENSORDATAPATH;
+var sensorDataPath = '/sensordata/';
 
 var piId = process.env.NODEID;
 
-var mqttClient = mqtt.connect(process.env.MQTTServer);
+var client = mqtt.connect(process.env.MQTTServer);
 
 client.on('connect', ()=> {
     inotify.addWatch({
