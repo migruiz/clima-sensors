@@ -6,7 +6,7 @@ services:
 
 env:
   global:
-    - PI_APP=climaV2-sensors
+    - PI_APP=climav2-sensors
   matrix:
     - PI_TYPE=rpi3
     - PI_TYPE=zero
