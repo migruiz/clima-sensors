@@ -35,7 +35,7 @@ RUN cd /code/pusher \
 
 
 
-RUN mkdir /sensordata
+RUN mkdir /sensorsdata
 
 COPY pusher /code/pusher
 

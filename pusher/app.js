@@ -2,7 +2,7 @@ var mqtt = require('mqtt')
 var fs = require('mz/fs')
 var Inotify = require('inotify').Inotify;
 var inotify = new Inotify();
-var sensorDataPath = '/sensordata/';
+var sensorDataPath = '/sensorsdata/';
 
 var piId = process.env.NODEID;
 
