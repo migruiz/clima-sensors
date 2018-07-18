@@ -7,9 +7,8 @@
     "name": "miguel"
   },
   "dependencies": {
-    "amqplib": "^0.5.1",
-    "asyncawait": "^1.0.0",
-    "inotify": "^1.4.2",
-    "mz": "^2.7.0"
+    "mqtt": "~2.18.2",
+    "inotify": "~1.4.2",
+    "mz": "~2.7.0"
   }
 }
