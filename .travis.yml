@@ -11,7 +11,7 @@ env:
     - PI_TYPE=rpi3
     - PI_TYPE=zero
 
-script: travis.sh
+script: bash travis.sh
 
 
 notifications:
