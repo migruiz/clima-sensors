@@ -6,16 +6,13 @@ services:
 
 env:
   global:
-    - PI_APP=climav2-sensors
+    - PI_APP=clima-sensors
   matrix:
     - PI_TYPE=rpi3
     - PI_TYPE=zero
 
-script:
-- docker pull migruiz/$PI_APP-$PI_TYPE || true
-- docker build -f Dockerfile_$PI_TYPE --cache-from migruiz/$PI_APP-$PI_TYPE  -t migruiz/$PI_APP-$PI_TYPE . || travis_terminate 1
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin || travis_terminate 1
-- docker push migruiz/$PI_APP-$PI_TYPE || travis_terminate 1
+script: bash travis.sh || travis_terminate 1;
+
 
 notifications:
    email:
