@@ -1,12 +1,11 @@
-var mqtt = require('mqtt')
+var mqttCluster = require('./mqttCluster.js').cluster();
 var fs = require('mz/fs')
 var Inotify = require('inotify').Inotify;
 var inotify = new Inotify();
 var sensorDataPath = '/sensorsdata/';
-
+global.zonesReadingsTopic = 'sensorReading';
+global.mtqqLocalPath = process.env.MQTTLOCAL;
 var piId = process.env.NODEID;
-
-var client = mqtt.connect(process.env.MQTTServer);
 
 client.on('connect', ()=> {
     inotify.addWatch({
@@ -28,8 +27,7 @@ async function handleReadingFileGeneratedV2(fileName) {
     var filePath = sensorDataPath + fileName;
     var data = await fs.readFile(filePath, 'utf8');
     var content = { data: data, fileName: fileName, piId: piId };
-    var msg = JSON.stringify(content);
-    client.publish('sensorReading', msg);
+    mqttCluster.publishData(global.zonesReadingsTopic, content);;
     await fs.unlink(filePath);
 }
 
