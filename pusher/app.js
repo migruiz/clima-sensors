@@ -7,13 +7,13 @@ global.zonesReadingsTopic = 'sensorReading';
 global.mtqqLocalPath = process.env.MQTTLOCAL;
 var piId = process.env.NODEID;
 
-client.on('connect', ()=> {
-    inotify.addWatch({
-        path: sensorDataPath,
-        watch_for: Inotify.IN_ALL_EVENTS,
-        callback: onNewFileGenerated
-    });
-})
+
+inotify.addWatch({
+    path: sensorDataPath,
+    watch_for: Inotify.IN_ALL_EVENTS,
+    callback: onNewFileGenerated
+});
+
 
 function onNewFileGenerated(event) {
     var mask = event.mask;
