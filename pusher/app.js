@@ -1,4 +1,4 @@
-var mqttCluster = require('./mqttCluster.js').cluster();
+var mqtt = require('./mqttCluster.js');
 var fs = require('mz/fs')
 var Inotify = require('inotify').Inotify;
 var inotify = new Inotify();
@@ -27,7 +27,7 @@ async function handleReadingFileGeneratedV2(fileName) {
     var filePath = sensorDataPath + fileName;
     var data = await fs.readFile(filePath, 'utf8');
     var content = { data: data, fileName: fileName, piId: piId };
-    mqttCluster.publishData(global.zonesReadingsTopic, content);;
+    mqtt.cluster.publishData(global.zonesReadingsTopic, content);;
     await fs.unlink(filePath);
 }
 
