@@ -2,7 +2,12 @@
 set -ev
 HUBNAME=""
 if [[ -z "$TRAVIS_TAG" ]]; then
-   HUBNAME=migruiz/$PI_APP-$PI_TYPE;
+	if [ "$TRAVIS_BRANCH" = "master" ]; then
+		HUBNAME=migruiz/$PI_APP-$PI_TYPE;
+	else
+		HUBNAME=migruiz/$PI_APP-$PI_TYPE:$TRAVIS_BRANCH
+	fi
+   
 else
 	HUBNAME=migruiz/$PI_APP-$PI_TYPE:$TRAVIS_TAG;
 fi
