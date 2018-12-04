@@ -2,31 +2,46 @@ var mqtt = require('mqtt')
 
 function MQTTClient(mqttServer) {
 
-    var client = mqtt.connect(mqttServer);
+    this.init=async function(){
+        var client  = mqtt.connect(mqttServer)
+        return new Promise(function (resolve, reject) {
+            client.on('connect', function () {
+                registerEvents(client)
+                resolve()
+            })
+            client.on('error', function (error) {
+                reject(error)
+            })
+        });
 
 
 
-    client.on('reconnect', function () {
-        console.log((new Date()).toString());
-        console.log('reconnect');
-    })
-    client.on('close', function () {
-        console.log((new Date()).toString());
-        console.log('close');
-    })
-    client.on('offline', function () {
-        console.log((new Date()).toString());
-        console.log('offline');
-    })
-    client.on('error', function (error) {
-        console.log((new Date()).toString());
-        console.log('error');
-        console.log(error);
-    })
-    client.on('end', function () {
-        console.log((new Date()).toString());
-        console.log('end');
-    })
+    }
+
+    function registerEvents(client){
+
+        client.on('reconnect', function () {
+            console.log((new Date()).toString());
+            console.log('reconnect');
+        })
+        client.on('close', function () {
+            console.log((new Date()).toString());
+            console.log('close');
+        })
+        client.on('offline', function () {
+            console.log((new Date()).toString());
+            console.log('offline');
+        })
+        client.on('error', function (error) {
+            console.log((new Date()).toString());
+            console.log('error');
+            console.log(error);
+        })
+        client.on('end', function () {
+            console.log((new Date()).toString());
+            console.log('end');
+        })
+}
 
     this.subscribeData = function (topic, onData) {
         client.subscribe(topic);
@@ -48,11 +63,11 @@ function MQTTClient(mqttServer) {
 var singleton;
 
 
-exports.cluster = function () {
+exports.getClusterAsync = async function () {
 
     if (!singleton) {
         singleton = new MQTTClient(global.mtqqLocalPath);
-    }
-
+        await singleton.init()
+    }    
     return singleton;
 }
