@@ -9,7 +9,6 @@ env:
     - PI_APP=clima-sensors
   matrix:
     - PI_TYPE=rpi3
-    - PI_TYPE=zero
 
 script: bash travis.sh || travis_terminate 1;
 
