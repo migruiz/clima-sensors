@@ -5,6 +5,7 @@ var inotify = new Inotify();
 var sensorDataPath = '/sensorsdata/';
 global.zonesReadingsTopic = 'sensorReading';
 global.mtqqLocalPath = process.env.MQTTLOCAL;
+//global.mtqqLocalPath = "mqtt://localhost";
 var piId = process.env.NODEID;
 
 
@@ -27,7 +28,8 @@ async function handleReadingFileGeneratedV2(fileName) {
     var filePath = sensorDataPath + fileName;
     var data = await fs.readFile(filePath, 'utf8');
     var content = { data: data, fileName: fileName, piId: piId };
-    (await mqtt.getClusterAsync()).publishData(global.zonesReadingsTopic, content);;
+    var mqttCluster=await mqtt.getClusterAsync() 
+    mqttCluster.publishData(global.zonesReadingsTopic, content);;
     await fs.unlink(filePath);
 }
 
