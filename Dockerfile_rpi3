@@ -17,35 +17,33 @@ RUN curl -o wiringpi.tar.gz  "https://git.drogon.net/?p=wiringPi;a=snapshot;h=8d
 && ./build \
 && cd ..
 
-RUN mkdir /code/
+RUN mkdir /ClimaSensors/
 
-RUN mkdir /code/extractor/ 
-COPY extractor /code/extractor
+RUN mkdir /ClimaSensors/extractor/ 
+COPY extractor /ClimaSensors/extractor
 
-RUN cd /code/extractor \
+RUN cd /ClimaSensors/extractor \
 && make 
 
-RUN  mkdir /code/pusher/ 
+RUN  mkdir /ClimaSensors/pusher/ 
 
-COPY pusher/package.json  /code/pusher/package.json
+COPY pusher/package.json  /ClimaSensors/pusher/package.json
 
-RUN cd /code/pusher \
+RUN cd /ClimaSensors/pusher \
 && npm  install 
 
 
 
 
-RUN mkdir /sensordata
+RUN mkdir /sensorsdata
 
-COPY pusher /code/pusher
+COPY pusher /ClimaSensors/pusher
 
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN [ "cross-build-end" ]  
 
-ENV NODEID 1
-ENV TEMPQUEUEURL amqp://pi:pi@192.168.0.96
 
 
 
