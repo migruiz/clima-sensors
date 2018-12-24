@@ -46,6 +46,7 @@ var startExtractorProcess = function () {
     extractorProcess.stderr.on('data', (data) => {
         console.error(`child stderr:\n${data}`);
     });
+}
 
     startExtractorProcess();
 
