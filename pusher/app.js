@@ -1,3 +1,4 @@
+var spawn = require('child_process').spawn;
 var mqtt = require('./mqttCluster.js');
 var fs = require('mz/fs')
 var Inotify = require('inotify').Inotify;
@@ -32,6 +33,21 @@ async function handleReadingFileGeneratedV2(fileName) {
     mqttCluster.publishData(global.zonesReadingsTopic, content);;
     await fs.unlink(filePath);
 }
+
+
+var startExtractorProcess = function () {
+    var extractorProcess = spawn('/ClimaSensors/extractor/ReadDataFromSensors'
+        , [
+            '/sensorsdata'
+        ]);
+    extractorProcess.stdout.on('data', (data) => {
+        console.log(data);
+    });
+    extractorProcess.stderr.on('data', (data) => {
+        console.error(`child stderr:\n${data}`);
+    });
+
+    startExtractorProcess();
 
 
 // Catch uncaught exception

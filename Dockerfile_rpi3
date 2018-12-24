@@ -40,13 +40,12 @@ RUN mkdir /sensorsdata
 COPY pusher /ClimaSensors/pusher
 
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 RUN [ "cross-build-end" ]  
 
 
 
 
-ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
+ENTRYPOINT ["node","/ClimaSensors/pusher/app.js"]
 
 
