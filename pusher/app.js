@@ -41,10 +41,10 @@ async function handleReadingFileGeneratedV2(fileName) {
             '/sensorsdata/'
         ]);
     extractorProcess.stdout.on('data', (data) => {
-        console.log(data);
+        console.log(data.toString());
     });
     extractorProcess.stderr.on('data', (data) => {
-        console.error(`child stderr:\n${data}`);
+        console.error(`child stderr:\n${data.toString()}`);
     });
 }
 
