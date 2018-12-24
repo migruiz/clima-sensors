@@ -36,10 +36,9 @@ async function handleReadingFileGeneratedV2(fileName) {
 
 
  function startExtractorProcess () {
-    console.log('entro')
     var extractorProcess = spawn('/ClimaSensors/extractor/ReadDataFromSensors'
         , [
-            '/sensorsdata'
+            '/sensorsdata/'
         ]);
     extractorProcess.stdout.on('data', (data) => {
         console.log(data);
