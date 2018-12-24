@@ -15,7 +15,7 @@ inotify.addWatch({
     watch_for: Inotify.IN_ALL_EVENTS,
     callback: onNewFileGenerated
 });
-
+startExtractorProcess();
 
 function onNewFileGenerated(event) {
     var mask = event.mask;
@@ -35,7 +35,8 @@ async function handleReadingFileGeneratedV2(fileName) {
 }
 
 
-var startExtractorProcess = function () {
+ function startExtractorProcess () {
+    console.log('entro')
     var extractorProcess = spawn('/ClimaSensors/extractor/ReadDataFromSensors'
         , [
             '/sensorsdata'
@@ -48,7 +49,7 @@ var startExtractorProcess = function () {
     });
 }
 
-    startExtractorProcess();
+
 
 
 // Catch uncaught exception
