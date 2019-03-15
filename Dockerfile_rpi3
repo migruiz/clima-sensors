@@ -6,7 +6,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 
 
 RUN apt-get update && \
-apt-get install -yqq --no-install-recommends g++ gcc make supervisor  && rm -rf /var/lib/apt/lists/*
+apt-get install -yqq --no-install-recommends g++ gcc make  && rm -rf /var/lib/apt/lists/*
 
 
 
@@ -40,13 +40,12 @@ RUN mkdir /sensorsdata
 COPY pusher /ClimaSensors/pusher
 
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN [ "cross-build-end" ]  
 
 
 
 
-ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT ["node","/ClimaSensors/pusher/app.js"]
 
 
