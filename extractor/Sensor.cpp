@@ -309,14 +309,10 @@ _sensorType=0x2D10;
 return decode_RGR918(pt); break;
  
 default:
-  std::cout << "Unknown sensor id: " << std::hex << isensorId << std::endl;
   return false;
   break;
 }
  
- }
- else {
-  std::cout << "OSV2 - decode: bad length" << std::endl; 
  }
  return false;
 }
@@ -748,7 +744,6 @@ bool OregonSensorV3::decode(char * _str) {
       _sensorName = "THGR810";
       return decode_THGR810(pt); break;
     default:
-      std::cout << "Unknown sensor id: " << std::hex << isensorId << std::endl;
       return false;
       break;
     }
