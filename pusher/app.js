@@ -29,7 +29,7 @@ async function handleReadingFileGeneratedV2(fileName) {
     var filePath = sensorDataPath + fileName;
     var data = await fs.readFile(filePath, 'utf8');
     var content = { data: data, fileName: fileName, piId: piId };
-    var mqttCluster=await mqtt.getClusterAsync() 
+    var mqttCluster=await mqtt.getClusterAsync(); 
     mqttCluster.publishData(global.zonesReadingsTopic, content);;
     await fs.unlink(filePath);
 }
